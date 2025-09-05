@@ -43,6 +43,7 @@ router
     if (post) res.json(post);
     else next();
   })
+  
   .patch((req, res, next) => {
     // find the item that the client wants to update
     const id = req.params.id;

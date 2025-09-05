@@ -12,8 +12,7 @@ const PORT = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// New logging middleware to help us keep track of
-// requests during testing!
+// New logging middleware to help us keep track of requests during testing!
 app.use((req, res, next) => {
   const time = new Date();
 
@@ -32,11 +31,8 @@ ${time.toLocaleTimeString()}: Received a ${req.method} request to ${req.url}.`
 // Valid API Keys.
 let apiKeys = ["perscholas", "ps-example", "hJAsknw-L198sAJD-l3kasx"];
 
-// New middleware to check for API keys!
-// Note that if the key is not verified,
-// we do not call next(); this is the end.
-// This is why we attached the /api/ prefix
-// to our routing at the beginning!
+// New middleware to check for API keys! Note that if the key is not verified, we do not call next(); this is the end.
+// This is why we attached the /api/ prefix to our routing at the beginning!
 app.use("/api", function (req, res, next) {
   var key = req.query["api-key"];
 

@@ -1,5 +1,7 @@
 import express from "express";
 import { users } from "../data/users.mjs";
+import { posts } from "../data/posts.mjs";
+
 const router = express.Router();
 
 // @route GET /api/users
@@ -77,5 +79,32 @@ router
       res.json(users);
     } else next();
   });
+
+// Additional routes
+// GET /api/users/:id/posts
+router
+.route("/:id/posts")
+.get((req, res, next) => {
+  // Find the user id
+  const userId = req.params.id;
+  const userPosts = [];
+
+  if (userId) {
+    posts.forEach(post => {
+      if(post.userId == userId) {
+        userPosts.push(post)
+      }
+    })
+    res.json(userPosts);
+
+  } else next();
+});
+
+//
+
+
+
+
+
 
 export default router;
