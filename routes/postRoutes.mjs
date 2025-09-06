@@ -9,8 +9,16 @@ const router = express.Router();
 router
   .route("/")
   .get((req, res) => {
-    res.json(posts);
+    const userId = req.query.userId;
+    console.log(userId)
+    if(userId) {
+      const postsByUser = posts.filter(post => post.userId == userId);
+      res.json(postsByUser);
+    } else {
+      res.json(posts);
+    }
   })
+  
   .post((req, res) => {
     const { userId, title, content } = req.body; // grabbing data the client entered through req.body
     let id = posts[posts.length - 1].id + 1; // creating a new id
@@ -77,6 +85,10 @@ router
     if (post) {
       res.json(posts);
     } else next();
-  });
+});
+
 
 export default router;
+
+// app.use("/api/posts", postRoutes);
+// http://localhost:3000/api/posts?userId=2&api-key=perscholas

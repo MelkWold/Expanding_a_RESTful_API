@@ -81,7 +81,7 @@ router
   });
 
 // Additional routes
-// GET /api/users/:id/posts
+// GET /api/users/:id/posts ---retrieves all posts by a user with the specified id
 router
 .route("/:id/posts")
 .get((req, res, next) => {
@@ -100,7 +100,8 @@ router
   } else next();
 });
 
-//
+
+
 
 
 
