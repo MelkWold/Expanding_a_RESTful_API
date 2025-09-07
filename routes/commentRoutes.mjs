@@ -25,8 +25,21 @@ router
       } else {
         res.json({ error: "Insufficient Data" });
       }
-    })
+    });
 
+// Get comments with Id
+router
+.route("/:id")
+.get((req, res, next) => {
+    const id = parseInt(req.params.id);
+    
+    const comment = comments.find(comment => comment.id == id);
+    
+    if (comment) res.json(comment); 
+    
+    else next();
+
+})
 
 
 export default router;
