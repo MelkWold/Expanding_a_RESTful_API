@@ -40,6 +40,37 @@ router
     else next();
 
 })
+.patch((req, res, next) => {
+    const id = req.params.id;
+    const data = req.body;
+    const comment = comments.find((comment, i) => {
+      if (comment.id == id) {
+        for (const item in data) {
+          // in the posts array grab the post that the client wants to change
+          comments[i][item] = data[item]; // make the change
+        }
+        return true;
+      }
+        });
+        // send a response
+        if (comment) {
+            res.json(comments);
+        } else next();
+})
 
+.delete((req, res, next) => {
+    const id = req.params.id;
+    const comment = comments.find((comment, i) => {
+      if (comment.id == id) {
+        comments.splice(i, 1); // remove the post at index i
+        return true;
+      }
+    });
+
+    // send the client a response
+    if (comment) {
+      res.json(comments);
+    } else next();
+});
 
 export default router;
